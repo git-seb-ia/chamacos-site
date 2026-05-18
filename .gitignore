@@ -1,0 +1,15 @@
+.DS_Store
+.env
+*.log
+node_modules/
+vendor/
+backup/
+backups/
+tmp/
+.cache/
+img/
+sound/
+fonts/
+robot.txt
+*.mp4
+img/*.mp4
