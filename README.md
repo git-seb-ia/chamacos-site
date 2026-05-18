@@ -1,5 +1,5 @@
 # Chamacos Website Automation
-[link]chamacos.fr
+[chamacos.fr](https://chamacos.fr)
 
 Site statique du projet musical CHAMACOS, enrichi par des automatisations n8n et des contenus générés via API IA.
 
