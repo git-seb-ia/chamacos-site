@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Chamacos - Concerts</title>
+        <meta name="description" content="Concerts">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="player/css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/fontAwesome.css">
+        <link rel="stylesheet" href="css/hero-slider.css">
+        <link rel="stylesheet" href="css/templatemo-main.css">
+        <link rel="stylesheet" href="css/owl-carousel.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link rel="shortcut icon" href="/favicon.ico">        
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head> 
+<body>
+    <div class="service-content page-concerts" style="min-height: 100vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="texte-principal" class="service-item" style="min-height: 244px;">
+                                <h4>Une ambiance live, festive et conviviale</h4>
+                                <div class="line-dec"></div>
+                                <p>Chamacos accompagne vos soirées, événements, restaurants, festivals et lieux culturels avec une formule vivante et adaptable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+                <div class="contact-content" id="photos">
+                    <div class="text-center"><h1 style="color:white">Dates à venir</h1></div>
+                    <div class="container">
+                        
+                        <div class="row pb-5"> 
+                            
+                            <div class="gallery" id="gallery"></div>
+
+                            <div class="lightbox" id="lightbox">
+                            <span class="close" onclick="closeLightbox()">&times;</span>
+                            <img id="lightbox-img" src="" alt="Image Agrandie">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="https://www.facebook.com/chamacos.fr" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.google.com/search?q=chamacos+sete&rlz=1C5CHFA_enFR1040FR1040&oq=chamacos+sete&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDM0NzlqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank"><i class="fa fa-google"></i></a></li>
+                    </ul>
+                    <p>Copyright &copy; 2023 Chamacos</p>
+                    <a href="mention.html">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function loadPageContent() {
+        const res = await fetch('/json/concerts.json', { cache: 'no-store' });
+        const data = await res.json();
+        document.getElementById('texte-principal').innerHTML = data.html;
+        }
+
+        loadPageContent();
+        setInterval(loadPageContent, 30000);
+    </script>
+
+    <script>
+        const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        fetch('images-affiche.php')
+            .then(response => {
+            if (!response.ok) throw new Error('Erreur lors du chargement des images');
+            return response.json();
+            })
+            .then(images => {
+            images.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Image ' + (index + 1);
+                img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = src;
+                lightboxImg.alt = img.alt;
+                });
+                gallery.appendChild(img);
+            });
+            })
+            .catch(error => {
+            console.log(error);
+            gallery.innerHTML = '<p>Impossible de charger les images.</p>';
+            });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+            closeLightbox();
+            }
+        });
+    </script>
+
+    </body>
+</html>
