@@ -68,3 +68,16 @@ Les images sont transférées automatiquement sur le VPS via :
 - SSH
 - JSON
 - VPS Linux
+
+
+- Ajout d'un second bot pour alimenter page concerts
+Chamacos Gallery Bot
+Chamacos Concerts Bot
+
+- Telegram Bot2 API
+- n8n
+- SSH
+- JSON
+- VPS Linux
+
+
